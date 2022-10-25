@@ -1,9 +1,9 @@
-import "./styles.css";
+// import "./styles.css";
 
 export default function App() {
   let arr = [
     [1, 1, 2, 2, 6, 5, 5, 8],
-    [3, 3, 4, 4, 6, 7, 7, 8]
+    [3, 3, 4, 4, 6, 7, 7, 8],
   ];
   let flatArr = arr.flat();
 
@@ -52,10 +52,38 @@ export default function App() {
     console.log(bitArr);
   };
 
+  const [inputList, setInputList] = useState([{ m: "", n: "" }]);
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
-      <p>{isValidArray(flatArr)}</p>
+      {inputList.map((x, i) => {
+        <>
+          <label>m=</label>
+          <input
+            name="arrayWidth"
+            placeholder="m"
+            value={x.m}
+            onChange={(e) => handleInputChange(e, i)}
+          />
+          <br />
+          <input
+            name="arrayWidth"
+            placeholder="n"
+            value={x.n}
+            onChange={(e) => handleInputChange(e, i)}
+          />
+          <input />
+          <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
+        </>;
+      })}
     </div>
   );
 }
